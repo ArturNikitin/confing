@@ -82,15 +82,15 @@ public class dijkctra {
 
         Map<String, String> parents = new HashMap<>();
 
-        for (String child:
-             graph.get(start).keySet()) {
+        for (String child :
+                graph.get(start).keySet()) {
             parents.put(child, start);
         }
 
         Set<String> processed = new HashSet<>();
         String node = findLowestNode(costs, processed);
 
-        while(node != null) {
+        while (node != null) {
             int cost = costs.get(node);
             if (!graph.get(node).keySet().isEmpty()) {
                 Set<String> neighbours = graph.get(node).keySet();
@@ -113,14 +113,14 @@ public class dijkctra {
             node = findLowestNode(costs, processed);
         }
 
-        if(!costs.containsKey(destination)) {
+        if (!costs.containsKey(destination)) {
             return -1;
         }
 
         List<String> criticalPath = new ArrayList<>();
         criticalPath.add(destination);
         while (true) {
-            String child = criticalPath.get(criticalPath.size()-1);
+            String child = criticalPath.get(criticalPath.size() - 1);
             if (parents.containsKey(child)) {
                 criticalPath.add(parents.get(child));
             } else
@@ -135,7 +135,7 @@ public class dijkctra {
     public static String findLowestNode(Map<String, Integer> costs, Set<String> processed) {
         int lowest = Integer.MAX_VALUE;
         String node = null;
-        for (Map.Entry<String, Integer> pair: costs.entrySet()) {
+        for (Map.Entry<String, Integer> pair : costs.entrySet()) {
             if (pair.getValue() < lowest && !processed.contains(pair.getKey())) {
                 node = pair.getKey();
                 lowest = pair.getValue();
